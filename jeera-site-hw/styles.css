@@ -1,0 +1,124 @@
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    top: 0;
+    background-color: transparent;
+    border-color: transparent;
+    padding: 20px 100px 20px 100px;
+}
+
+.sticky {
+    position: fixed;
+    top: 0;
+    width: 100%;
+  }
+
+  .navbar p {
+    font-size: 25px;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+
+.nav__buttons {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 45px;
+}
+
+/* Remove link decoration from word */
+.nav__link {
+    text-decoration: none;
+    color: black;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.social__icon {
+    width: 40px;
+    padding: 0 10px 0 10px;
+}
+
+.home-div {
+    display: flex;
+}
+
+.homeImg {
+    width: 50%;
+}
+
+.homeImg img {
+    width: 100%;
+    height: 100%;
+}
+
+.homeDesc {
+    display: flex;
+    width: 50%;
+    justify-content: center;
+    align-items: flex-start;
+    align-content: center;
+    flex-wrap: wrap;
+    flex-direction: column;
+    padding: 0 120px 0 120px;
+    gap: 80px;
+}
+
+.homeDesc p {
+    font-size: 118px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 700;
+}
+
+.homeDesc button {
+    color: white;
+    font-size: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: black;
+    padding: 10px 30px 10px 30px;
+    border: 0;
+}
+
+.services {
+    display: flex;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.services__title {
+
+}
+
+.services__hr {
+
+}
+
+.services__desc {
+
+}
+
+.services__card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.serviceCardIcon {
+
+}
+
+.serviceCardTitle {
+
+}
+
+.serviceCardDesc {
+
+}

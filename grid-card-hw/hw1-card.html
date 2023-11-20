@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+  <!-- session final-1 -->
+  <!-- Task: set box-sizing to border-box, margin to 0, and padding to 0 -->
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+  </style>
+
+  <!-- session final-1 -->
+  <!-- Task: set the page body to fill 100 viewport height units, and set ts display mode to flex -->
+  <style>
+    body {
+      height: 100vh;
+      display: flex;
+    }
+  </style>
+
+  <!-- session final-1 -->
+  <!-- Task: add styles for card component and its elements -->
+  <!-- Hint: .card: width 300 pixels, border radius 8 pixels, hide the parts that overflow outside of the element, 
+    and give this a box-shadow -->
+  <style>
+    .card {
+      width: 300px;
+      height: fit-content;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 1px 0px 40px rgba(0, 0, 0, 0.3);
+    }
+  </style>
+  <!-- Hint: .card--dark: overrides the background color to be #333333, changes teh box-shadow color to a red tone -->
+  <!-- ** Bottom of styles ** -->
+
+  <!-- Hint: .card__header: apply flexbox layout, space elements using the space between them, apply 8 pixels vertical padding, 
+    16 pixels horizontal padding -->
+  <style>
+    .card__header {
+      display: flex;
+      justify-content: space-between;
+      padding-top: 8px;
+      padding-bottom: 8px;
+      padding-left: 16px;
+      padding-right: 16px;
+    }
+  </style>
+  <!-- Hint: .card__image: width 100% of the parent/closest relative element, keep the aspect ratio by setting the height to auto, 
+    avoid any pointer events -->
+  <style>
+    .card__image {
+      width: 100%;
+      height: auto;
+      pointer-events: none;
+    }
+  </style>
+  <!-- Hint: .card__content: all around padding of 16 pixels -->
+  <style>
+    .card__content {
+      padding: 16px;
+    }
+  </style>
+  <!-- Hint: .card__title: set font size to 18 pixels, and make the font bold. Also put a margin of 8 pixels on the bottom, 
+    and position this element as relative for the tooltip -->
+  <style>
+    .card__title {
+      font-size: 18px;
+      font-weight: bold;
+      margin-bottom: 8px;
+      position: relative;
+    }
+  </style>
+  <!-- Hint: .card__title::after: set content as the title attribute, position absolute, width 140 pixels, 
+    opcaity of zero to keep it hidden, and any additional needed styles -->
+  <style>
+    .card__title::after {
+      content: attr(title);
+      position: absolute;
+      width: 140px;
+      opacity: 0;
+    }
+  </style>
+  <!-- Hint: .card__title:hover::after: set opacity to 1 here  -->
+  <style>
+    .card__title:hover::after {
+      opacity: 1;
+    }
+  </style>
+  <!-- Hint: .card__text: set the font size to 14 pixels, the color to hex '666666', and the bottom margin to 16 pixels -->
+  <style>
+    .card__text {
+      font-size: 14px;
+      color: #666666;
+      margin-bottom: 16px;
+    }
+  </style>
+  <!-- Hint: .card__price: set the font size to 16 pixels, the top margin to 8 pixels, and the font weight to bold -->
+  <style>
+    .card__price {
+      font-size: 16px;
+      margin-top: 8px;
+      font-weight: bold;
+    }
+  </style>
+  <!-- Hint: .card__button: remove any text decoration, set bg color to hex '4caf50', vertical padding to 8px, 
+    and horizontal padding to 16px. Also add a transition effect to the bg color -->
+  <style>
+    .card__button {
+      text-decoration: none;
+      background-color: #4caf50;
+      padding: 8px 16px;
+      transition: background-color 0.5s ease-in-out;
+    }
+  </style>
+  <!-- Hint: .card__button:hover: changes the bg color to hex '45a049' -->
+  <style>
+    .card__button:hover {
+      background-color: #45a049;
+    }
+  </style>
+
+  <!-- session final-1 -->
+  <!-- Task: add styles for card component with --dark modifier -->
+  <!-- Hint: text color should be hex 'cccccc' -->
+  <style>
+    .card--dark {
+      background-color: #333333;
+      box-shadow: 1px 4px 40px rgba(255, 0, 0, 0.3);
+      color: #cccccc;
+    }
+  </style>
+  <!-- Hint: .card__button bg color should be hex '1e824c' -->
+  <style>
+    .card__button{
+      background-color: #1e824c;
+    }
+  </style>
+  <!-- Hint: .card__button:hover bg color should be hex '1a6c3d' -->
+  <style>
+    .card__button:hover {
+      background-color: #1a6c3d;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- session final-1 -->
+  <!-- Task: add a card element -->
+  <!-- Hint: structure of a card:  <div class="card"> <img /> <div> <h2 title="...">...</h2> <p>$...</p> <p>Description goes here...</p> <a>Read More</a> </div> </div> -->
+
+  <div class="card card--dark">
+    <img class="card__image" src="kitty.jpg" />
+    <span class="card__header">
+      <h2 class="card__title" title="h2 title">Card Header</h2>
+      <p class="card__price">20$</p>
+    </span>
+    <div class="card__content">
+      <p class="card__text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur, aut blanditiis quas
+        magni a nemo magnam vero fuga accusantium libero asperiores quidem quis dolore, dolores officia, facilis
+        exercitationem voluptatum veritatis.</p>
+      <a class="card__button" href="">Read More</a>
+    </div>
+  </div>
+
+</body>
+
+</html>
