@@ -17,10 +17,12 @@
             <a href="#" class="nav__link">Pricing</a>
             <a href="#" class="nav__link">Portfolio</a>
             <a href="#" class="nav__link">Contact</a>
-            <a href="#"><img class="social__icon" src="images/icons/twitterIcon.webp" alt="twitter"></a>
-            <a href="#"><img class="social__icon" src="images/icons/InstaIcon.png" alt="insta"></a>
-            <a href="#"><img class="social__icon" src="images/icons/facebookIcon.png" alt="fb"></a>
-            <a href="#"><img class="social__icon" src="images/icons/searchIcon.png" alt="search"></a>
+            <div class="container-social">
+                <a href="#"><img class="social__icon" src="images/icons/twitterIcon.webp" alt="twitter"></a>
+                <a href="#"><img class="social__icon" src="images/icons/InstaIcon.png" alt="insta"></a>
+                <a href="#"><img class="social__icon" src="images/icons/facebookIcon.png" alt="fb"></a>
+                <a href="#"><img class="social__icon" src="images/icons/searchIcon.png" alt="search"></a>
+            </div>
         </div>
     </header>
 
@@ -28,6 +30,7 @@
         <div class="homeImg">
             <img src="images/section-imgs/bg1.jpg" alt="bg1">
         </div>
+
 
         <div class="homeDesc">
             <p>Jeera agency is ready to take your project.</p>
@@ -91,12 +94,12 @@
 
 <script>
     // Script to change the navbar background color when user scrolls
-    window.onscroll = function() {
-      var navbar = document.getElementById("navbar");
-      if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
-        navbar.style.backgroundColor = "white";
-      } else {
-        navbar.style.backgroundColor = "transparent";
-      }
+    window.onscroll = function () {
+        var navbar = document.getElementById("navbar");
+        if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
+            navbar.style.backgroundColor = "white";
+        } else {
+            navbar.style.backgroundColor = "transparent";
+        }
     };
-  </script>
+</script>
