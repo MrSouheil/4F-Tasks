@@ -2,7 +2,11 @@
     box-sizing: border-box;
     padding: 0;
     margin: 0;
-    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.dropdown {
+    display: none;
 }
 
 .navbar {
@@ -20,11 +24,11 @@
     position: fixed;
     top: 0;
     width: 100%;
-  }
+}
 
-  .navbar p {
+.navbar p {
     font-size: 25px;
-  }
+}
 
 .nav__buttons {
     display: flex;
@@ -179,7 +183,7 @@
     margin: 40px 0px;
 }
 
-.features__desc{
+.features__desc {
     padding-bottom: 40px;
     color: #444444;
 }
@@ -200,11 +204,11 @@
     padding-bottom: 60px;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1024px) {
 
     .navbar {
-        flex-direction: column;                                    
-        justify-content: center;
+        flex-direction: row;
+        justify-content: space-around;
         align-items: center;
         background-color: white;
         padding: 5px;
@@ -217,12 +221,12 @@
     }
 
     .homeDesc P {
-        font-size: 20px;
+        font-size: 28px;
     }
 
     .nav__buttons {
         display: flex;
-        flex-direction: column;
+        flex-direction: row;
         flex-wrap: wrap;
         align-items: center;
         gap: 10px;
@@ -232,15 +236,206 @@
         position: unset;
         top: unset;
         width: unset;
-      }
+    }
 
-      .homeDesc {
+    .homeDesc {
         gap: 10px;
         padding: 0 50px;
-      }
+    }
 
-      .homeDesc button {
+    .homeDesc button {
+        font-size: 28px;
+        padding: 5px 10px;
+    }
+
+    .featuresDesc {
+        padding: 20px 10px 0 10px;
+        align-items: center;
+    }
+
+    .features__title {
+        font-size: 38px;
+    }
+
+    .services {
+        padding: 50px 0;
+    }
+
+}
+
+@media screen and (max-width: 768px) {
+
+    .navbar {
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+        background-color: white;
+        padding: 5px;
+        transition: unset;
+        gap: 10px;
+    }
+
+    .homeImg img {
+        height: unset;
+    }
+
+    .homeDesc P {
+        font-size: 28px;
+    }
+
+    .nav__buttons {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .sticky {
+        position: unset;
+        top: unset;
+        width: unset;
+    }
+
+    .homeDesc {
+        gap: 10px;
+        padding: 0 50px;
+    }
+
+    .homeDesc button {
+        font-size: 28px;
+        padding: 5px 10px;
+    }
+
+    .featuresDesc {
+        padding: 20px 10px 0 10px;
+        align-items: center;
+    }
+
+    .features__title {
+        font-size: 38px;
+    }
+
+    .services {
+        padding: 50px 0;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .navbar {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        background-color: white;
+        padding: 5px 15px 5px 15px;
+        transition: unset;
+        gap: 10px;
+        width: 100%;
+    }
+
+    .navbar:hover .nav__buttons {
+        display: block;
+    }
+
+    .dropdown {
+        display: unset;
+    }
+
+    .homeImg img {
+        height: unset;
+    }
+
+    .homeDesc P {
+        font-size: 14px;
+    }
+
+    .nav__buttons {
+        display: none;
+        position: absolute;
+        background-color: #f9f9f9;
+        min-width: 160px;
+        box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+        padding: 12px 16px;
+        z-index: 1;
+        top: 20px;
+
+        /* display: flex; */
+        /* flex-direction: row; */
+        /* flex-wrap: wrap; */
+        /* align-items: center; */
+        /* gap: 10px; */
+    }
+
+    .sticky {
+        position: unset;
+        top: unset;
+        width: unset;
+    }
+
+    .homeDesc {
+        gap: 10px;
+        padding: 0 20px;
+    }
+
+    .homeDesc button {
         font-size: 14px;
         padding: 5px 10px;
-      }
+    }
+
+    .featuresDesc {
+        padding: 20px 10px 0 10px;
+        align-items: center;
+    }
+
+    .features__title {
+        font-size: 28px;
+    }
+
+    .features__hr {
+        margin: 15px 0;
+    }
+
+    .features__desc {
+        font-size: 12px;
+    }
+
+    .featureTitle {
+        font-size: 16px;
+    }
+
+    .featureDesc {
+        font-size: 12px;
+    }
+
+    .services {
+        padding: 20px 0;;
+    }
+
+    .services__title {
+        font-size: 24px;
+    }
+
+    .services__hr {
+        margin: 15px 0;
+    }
+
+    .services__desc {
+        font-size: 18px;
+    }
+
+    .card-scroll {
+        gap: 20px;
+    }
+
+    .serviceCardTitle {
+        font-size: 14px;
+    }
+
+    .serviceCardDesc {
+        font-size: 10px;
+    }
+
+    .services__card {
+        min-width: 40%;
+    }
 }
