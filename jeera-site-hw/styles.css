@@ -384,9 +384,18 @@
         padding: 5px 10px;
     }
 
+    .features {
+        flex-direction: column;
+    }
+
     .featuresDesc {
         padding: 20px 10px 0 10px;
         align-items: center;
+        width: 100%;
+    }
+
+    .featuresImg {
+        width: 100%;
     }
 
     .features__title {
@@ -426,7 +435,7 @@
     }
 
     .card-scroll {
-        gap: 20px;
+        gap: 5px;
     }
 
     .serviceCardTitle {
