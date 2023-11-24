@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <style>
+        body {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 10px
+        }
+    </style>
+
+    <div class="output">
+        <p> Output: <span id="sumResult"> 0 </span></p>
+    </div>
+    <div class="input">
+        <input type="number" id="num" placeholder="Enter number">
+    </div>
+    <div class="buttons">
+        <button onclick="add()">Add</button>
+        <button onclick="subtract()">Subtract</button>
+    </div>
+</body>
+</html>
+
+<script>
+    let sum = 0;
+    function add(){
+        let num = document.getElementById('num').value;
+        sum += parseInt(num);
+        document.getElementById('sumResult').innerHTML = sum;
+    }
+
+    function subtract(){
+        let num = document.getElementById('num').value;
+        sum -= parseInt(num);
+        document.getElementById('sumResult').innerHTML = sum;
+    }
+</script>
