@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS Carousel</title>
+</head>
+
+<body>
+
+    <style>
+        body {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .imageCarousel {
+            display: flex;
+            align-items: center;
+            padding: 50px;
+            border: black 2px solid;
+            box-shadow: black 2px 2px 5px;
+            position: relative;
+        }
+
+        .image {
+            width: 400px;
+            opacity: 1;
+            transition: opacity 1s ease-in-out;
+        }
+
+        .arrowImg {
+            width: 50px;
+            position: absolute;
+        }
+
+        #previousImg {
+            left: 0;
+        }
+
+        #nextImg {
+            right: 0;
+        }
+
+        .image.active {
+            opacity: 0;
+        }
+    </style>
+
+    <div class="imageCarousel">
+        <img class="image" src="images/forest.webp" alt="">
+        <img class="arrowImg" id="previousImg" src="images/left-arrow.png" alt="">
+        <img class="arrowImg" id="nextImg" src="images/right-arrow.png" alt="">
+    </div>
+</body>
+
+</html>
+
+<script>
+    let imageSources = ["images/forest.webp", "images/lake.jpg", "images/mountain.webp"]
+
+    document.querySelector("#nextImg").addEventListener("click", function () {
+        let currentImage = document.querySelector(".image").getAttribute("src");
+        let currentIndex = imageSources.indexOf(currentImage);
+        if (currentIndex < imageSources.length - 1) {
+            document.querySelector(".image").setAttribute("src", imageSources[++currentIndex]);
+        } else {
+            document.querySelector(".image").setAttribute("src", imageSources[0]);
+        }
+    });
+
+    document.querySelector("#previousImg").addEventListener("click", function () {
+        let currentImage = document.querySelector(".image").getAttribute("src");
+        let currentIndex = imageSources.indexOf(currentImage);
+        if (currentIndex > 0) {
+            document.querySelector(".image").setAttribute("src", imageSources[--currentIndex]);
+        } else {
+            document.querySelector(".image").setAttribute("src", imageSources[imageSources.length - 1]);
+        }
+    })
+</script>

@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="https://unpkg.com/tailwindcss@2.2.19/dist/tailwind.min.css" />
+  <link href="/dist/output.css" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+  <title>Corner Store</title>
+</head>
+
+<body>
+  <header class="flex items-center place-content-between max-w-screen px-5 tablet:px-20 desktop:px-40 py-5">
+    <div class="flex gap-4 tablet:gap-6 desktop:gap-8">
+      <p class="text-lg tablet:text-xl desktop:text-xl font-medium text-gray-900"> Home </p>
+      <p class="text-lg tablet:text-xl desktop:text-xl font-medium text-gray-900"> About </p>
+    </div>
+    <div>
+      <img class="w-5 tablet:w-8 desktop:w-10 h-5 tablet:h-8 desktop:h-10" src="images/icons/bag.png" alt="">
+    </div>
+    <div class="flex gap-4 tablet:gap-6 desktop:gap-8">
+      <img class="w-5 tablet:w-8 desktop:w-10 h-5 tablet:h-8 desktop:h-10" src="images/icons/user.png" alt="">
+      <img class="w-5 tablet:w-8 desktop:w-10 h-5 tablet:h-8 desktop:h-10" src="images/icons/shopping-cart.png" alt="">
+    </div>
+  </header>
+
+
+  <div class="carousel flex justify-center items-center overflow-hidden max-w-screen max-h-screen">
+    <div
+      class=" flex items-center gap-5 tablet:gap-10 desktop:gap-20 absolute z-10 left-0 ml-4 tablet:ml-8 desktop:ml-16">
+      <img
+        class="w-5 tablet:w-8 desktop:w-10 h-5 tablet:h-8 desktop:h-10 bg-white rounded-full p-1 tablet:p-3 desktop:p-3"
+        id="previousImg" src="images/icons/left-arrow.png" alt="">
+      <div class="flex-col flex-wrap">
+        <p class="bg-white rounded-full text-sm tablet:text-xl desktop:text-4xl font-semibold tracking-normal tablet:tracking-wide desktop:tracking-widest 
+          px-1 tablet:px-3 desktop:px-5 py-1 tablet:py-3 desktop:py-3">
+          Bed pillows and table sets </p>
+        <a href="#"
+          class="text-xs tablet:text-lg desktop:text-2xl font-medium underline tracking-tight tablet:tracking-wide desktop:tracking-wider text-gray-800">
+          View products </a>
+      </div>
+    </div>
+    <img class="image relative w-full max-w-full" src="images/backgrounds/pillow1.webp" alt="">
+    <img class="w-5 tablet:w-8 desktop:w-10 h-5 tablet:h-8 desktop:h-10 absolute z-10 right-0 mr-4 tablet:mr-8 desktop:mr-16 
+      bg-white rounded-full p-1 tablet:p-3 desktop:p-3" id="nextImg" src="images/icons/right-arrow.png" alt="">
+  </div>
+
+
+  <div class="store px-10 tablet:px-20 desktop:px-40 pt-5 tablet:pt-10 desktop:pt-20 pb-5 tablet:pb-10 desktop:pb-20">
+    <div class="flex max-w-screen place-content-between pt-4 pb-4 tablet:pb-8 desktop:pb-16">
+      <p class="block text-lg tablet:text-2xl desktop:text-3xl font-semibold"> Store </p>
+      <div class="flex items-center gap-5">
+        <div class="searchBar hidden relative items-center">
+          <input class="border-2 py-1 px-2 rounded-md border-gray-800" type="text" placeholder="Search for an item">
+          <img class="absolute right-0 h-5 w-5 mr-3" id="closeSearch" src="images/icons/remove.png" alt="">
+        </div>
+        <img class="w-4 tablet:w-6 desktop:w-8 h-4 tablet:h-6 desktop:h-8" src="images/icons/list-text.png" alt="">
+        <img class="w-4 tablet:w-6 desktop:w-8 h-4 tablet:h-6 desktop:h-8" id="searchBtn" src="images/icons/search.png"
+          alt="">
+      </div>
+    </div>
+
+    <div class="product-grid grid gap-10 grid-cols-1 tablet:grid-cols-2 laptop:grid-cols-3 desktop:grid-cols-4">
+
+    </div>
+  </div>
+
+
+  <hr>
+
+
+  <div class="about px-10 tablet:px-20 desktop:px-40 py-5 tablet:py-10 desktop:py-20">
+    <p class="block text-lg tablet:text-xl desktop:text-3xl font-semibold pb-5 tablet:pb-10 desktop:pb-20"> About </p>
+    <p class="text-sm tablet:text-lg desktop:text-xl font-normal">Lorem ipsum dolor sit amet, consectetur adipisicing
+      elit.
+      Cum laudantium incidunt eveniet quisquam id quidem dolorum.
+      Unde molestiae, laborum tenetur vero debitis repellendus earum consectetur eum, quisquam rerum, labore libero?
+      Quibusdam voluptatibus iusto eaque natus tempora laboriosam!
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+      Cum laudantium incidunt eveniet quisquam id quidem dolorum.
+      Quibusdam voluptatibus iusto eaque natus tempora laboriosam!
+    </p>
+  </div>
+
+</body>
+
+</html>
+
+<script>
+  let imageSources = ["images/backgrounds/pillow1.webp",
+    "images/backgrounds/pillow2.webp",
+    "images/backgrounds/pillow3.jpg",
+    "images/backgrounds/pillow4.webp",
+    "images/backgrounds/pillow5.webp"]
+
+  document.querySelector("#nextImg").addEventListener("click", function () {
+    let currentImage = document.querySelector(".image").getAttribute("src");
+    let currentIndex = imageSources.indexOf(currentImage);
+    if (currentIndex < imageSources.length - 1) {
+      document.querySelector(".image").setAttribute("src", imageSources[++currentIndex]);
+    } else {
+      document.querySelector(".image").setAttribute("src", imageSources[0]);
+    }
+  });
+
+  document.querySelector("#previousImg").addEventListener("click", function () {
+    let currentImage = document.querySelector(".image").getAttribute("src");
+    let currentIndex = imageSources.indexOf(currentImage);
+    if (currentIndex > 0) {
+      document.querySelector(".image").setAttribute("src", imageSources[--currentIndex]);
+    } else {
+      document.querySelector(".image").setAttribute("src", imageSources[imageSources.length - 1]);
+    }
+  })
+
+  let productsArray = ["images/backgrounds/coffee.png",
+    "images/backgrounds/candle.png",
+    "images/backgrounds/dice.png",
+    "images/backgrounds/lens.png",
+    "images/backgrounds/pillow.png",
+    "images/backgrounds/lamp.webp",
+    "images/backgrounds/table.png",
+    "images/backgrounds/projector.png"]
+
+  let divContainer;
+  let newDivCard;
+  let i = 0;
+
+  function createCard() {
+    return `
+        <img class="w-full h-auto tablet:h-4/5 desktop:h-4/5 bg-gray-200 p-6 mb-2"
+          src="` + productsArray[i] + `" alt="">
+        <div class="flex w-full place-content-between items-center h-auto tablet:h-1/5 desktop:h-1/5 p-4">
+          <div class="flex-col">
+            <p class="font-medium text-gray-600"> Product Name </p>
+            <p class="font-medium"> $9.99 </p>
+          </div>
+          <div class="heartfn">
+            <img class="heart-normal w-6 h-6" src="images/icons/heart.png" alt="">
+            <img class="heart-red hidden w-6 h-6" src="images/icons/heart-red.png" alt="">
+          </div>
+        </div>
+      `;
+  };
+
+  divContainer = document.querySelector('.product-grid');
+  for (i = 0; i < productsArray.length; i++) {
+    newDivCard = document.createElement("div");
+    newDivCard.innerHTML = createCard();
+    divContainer.appendChild(newDivCard);
+    divContainer.classList.add('flex.flex-col.w-min-1/5.shadow-lg')
+  }
+
+  document.querySelectorAll('.heartfn').forEach(heartfn => {
+    heartfn.addEventListener('click', function () {
+      const heartNormal = this.querySelector('.heart-normal');
+      const heartRed = this.querySelector('.heart-red');
+
+      if (heartRed.classList.contains('hidden')) {
+        heartRed.classList.remove('hidden');
+        heartNormal.classList.add('hidden');
+      } else {
+        heartRed.classList.add('hidden');
+        heartNormal.classList.remove('hidden');
+      }
+    });
+  });
+
+</script>
