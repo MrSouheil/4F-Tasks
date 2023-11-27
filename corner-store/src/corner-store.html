@@ -51,9 +51,9 @@
     <div class="flex max-w-screen place-content-between pt-4 pb-4 tablet:pb-8 desktop:pb-16">
       <p class="block text-lg tablet:text-2xl desktop:text-3xl font-semibold"> Store </p>
       <div class="flex items-center gap-5">
-        <div class="searchBar hidden relative items-center">
-          <input class="border-2 py-1 px-2 rounded-md border-gray-800" type="text" placeholder="Search for an item">
-          <img class="absolute right-0 h-5 w-5 mr-3" id="closeSearch" src="images/icons/remove.png" alt="">
+        <div class="searchBar hidden relative items-center" id="searchBar">
+          <input class="border-2 py-1 px-2 rounded-md border-gray-800" id="searchInput" type="text"
+            placeholder="Search for an item">
         </div>
         <img class="w-4 tablet:w-6 desktop:w-8 h-4 tablet:h-6 desktop:h-8" src="images/icons/list-text.png" alt="">
         <img class="w-4 tablet:w-6 desktop:w-8 h-4 tablet:h-6 desktop:h-8" id="searchBtn" src="images/icons/search.png"
@@ -61,9 +61,9 @@
       </div>
     </div>
 
-    <div class="product-grid grid gap-10 grid-cols-1 tablet:grid-cols-2 laptop:grid-cols-3 desktop:grid-cols-4">
+    <div class="hidden mt-8 text-xl font-bold text-red-500" id="noResultsMessage"></div>
 
-    </div>
+    <div class="product-grid grid gap-10 grid-cols-1 tablet:grid-cols-2 laptop:grid-cols-3 desktop:grid-cols-4"></div>
   </div>
 
 
@@ -114,14 +114,41 @@
     }
   })
 
-  let productsArray = ["images/backgrounds/coffee.png",
+  document.getElementById("searchBtn").addEventListener("click", function () {
+    var searchBar = document.getElementById("searchBar");
+    if (searchBar.classList.contains("hidden")) {
+      searchBar.classList.remove("hidden");
+    } else {
+      searchBar.classList.add("hidden");
+    }
+  });
+
+  let productsImgArray = ["images/backgrounds/coffee.png",
     "images/backgrounds/candle.png",
     "images/backgrounds/dice.png",
     "images/backgrounds/lens.png",
     "images/backgrounds/pillow.png",
     "images/backgrounds/lamp.webp",
     "images/backgrounds/table.png",
-    "images/backgrounds/projector.png"]
+    "images/backgrounds/projector.png"];
+
+  let productsNameArray = ["Coffee Mug",
+    "Candles",
+    "Dice",
+    "Camera Lens",
+    "White Pillow",
+    "Desk Lamp",
+    "Bed Table",
+    "Projector"];
+
+  let productsPriceArray = ["3.99",
+    "1.49",
+    "0.99",
+    "59.99",
+    "14.99",
+    "27.49",
+    "39.99",
+    "74.99"];
 
   let divContainer;
   let newDivCard;
@@ -130,11 +157,11 @@
   function createCard() {
     return `
         <img class="w-full h-auto tablet:h-4/5 desktop:h-4/5 bg-gray-200 p-6 mb-2"
-          src="` + productsArray[i] + `" alt="">
+          src="` + productsImgArray[i] + `" alt="">
         <div class="flex w-full place-content-between items-center h-auto tablet:h-1/5 desktop:h-1/5 p-4">
           <div class="flex-col">
-            <p class="font-medium text-gray-600"> Product Name </p>
-            <p class="font-medium"> $9.99 </p>
+            <p class="product-name font-medium text-gray-600">` + productsNameArray[i] + `</p>
+            <p class="product-price font-medium"> $` + productsPriceArray[i] + `</p>
           </div>
           <div class="heartfn">
             <img class="heart-normal w-6 h-6" src="images/icons/heart.png" alt="">
@@ -145,11 +172,15 @@
   };
 
   divContainer = document.querySelector('.product-grid');
-  for (i = 0; i < productsArray.length; i++) {
+  for (i = 0; i < productsImgArray.length; i++) {
     newDivCard = document.createElement("div");
     newDivCard.innerHTML = createCard();
     divContainer.appendChild(newDivCard);
-    divContainer.classList.add('flex.flex-col.w-min-1/5.shadow-lg')
+    newDivCard.classList.add('grid-item')
+    newDivCard.classList.add('flex')
+    newDivCard.classList.add('flex-col')
+    newDivCard.classList.add('w-min-1/5')
+    newDivCard.classList.add('shadow-lg')
   }
 
   document.querySelectorAll('.heartfn').forEach(heartfn => {
@@ -167,4 +198,33 @@
     });
   });
 
+  const searchBar = document.getElementById('searchBar');
+  const searchInput = searchBar.querySelector('input');
+  const cards = document.querySelectorAll('.grid-item');
+  const noResultsMessage = document.getElementById('noResultsMessage');
+
+  searchInput.addEventListener('input', () => {
+    const searchText = searchInput.value.toLowerCase();
+    let hasResults = false;
+
+    cards.forEach(card => {
+      const productName = card.querySelector('.product-name').textContent.toLowerCase();
+      const productPrice = card.querySelector('.product-price').textContent.toLowerCase();
+
+      if (productName.includes(searchText) || productPrice.includes(searchText)) {
+        card.style.display = '';
+        hasResults = true;
+      } else {
+        card.style.display = 'none';
+      }
+    });
+
+    if (hasResults) {
+      noResultsMessage.classList.add('hidden');
+    } else {
+      noResultsMessage.classList.remove('hidden');
+      noResultsMessage.textContent = 'No results found for your search.';
+    }
+
+  });
 </script>
