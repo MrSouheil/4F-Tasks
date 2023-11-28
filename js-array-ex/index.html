@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+
+</html>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+
+    //Define a random array of 10 numbers between 1 and 10
+    let numArray = [5,8,6,7,8,4,6,1,0,9];
+
+    //Wait for 2 seconds
+    setTimeout(() => {
+
+        //Sort array by descending order
+        //numArray.sort().reverse();
+        let reverseSortedArray = numArray.sort((a, b) => (b - a));
+        console.log(reverseSortedArray)
+
+        //Filter odd numbers in array
+        let onlyOdd = numArray.filter(function(number){
+            if(number % 2 == 0) {
+                return false;
+            } else {
+                return true;
+            }
+        })
+        console.log(onlyOdd);
+
+        //Filter even numbers in array
+        let onlyEven = numArray.filter(function(number){
+            if(number % 2 == 1) {
+                return false;
+            } else {
+                return true;
+            }
+        })
+        console.log(onlyEven);
+
+
+
+    }, 2000)
+
+    function emptyFn() {
+        //Totally valid empty function that returns nothing
+    }
+            
+})
+</script>
