@@ -4,8 +4,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://kit.fontawesome.com/ea704375c9.js" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="https://unpkg.com/tailwindcss@2.2.19/dist/tailwind.min.css" />
-  <link href="/dist/output.css" rel="stylesheet">
+  <link href="../dist/output.css" rel="stylesheet">
   <link rel="stylesheet" href="styles.css" />
   <title>Corner Store</title>
 </head>
@@ -55,6 +56,8 @@
           <input class="border-2 py-1 px-2 rounded-md border-gray-800" id="searchInput" type="text"
             placeholder="Search for an item">
         </div>
+          <i class="sort-asc fa-solid fa-sort-up fa-xl"></i>
+          <i class="sort-desc fa-solid fa-sort-down fa-xl"></i>
         <img class="w-4 tablet:w-6 desktop:w-8 h-4 tablet:h-6 desktop:h-8" src="images/icons/list-text.png" alt="">
         <img class="w-4 tablet:w-6 desktop:w-8 h-4 tablet:h-6 desktop:h-8" id="searchBtn" src="images/icons/search.png"
           alt="">
@@ -63,7 +66,27 @@
 
     <div class="hidden mt-8 text-xl font-bold text-red-500" id="noResultsMessage"></div>
 
-    <div class="product-grid grid gap-10 grid-cols-1 tablet:grid-cols-2 laptop:grid-cols-3 desktop:grid-cols-4"></div>
+    <div class="product-grid grid gap-10 grid-cols-1 tablet:grid-cols-2 laptop:grid-cols-3 desktop:grid-cols-4">
+      <template id="product-card-template">
+        <div class="product-card product-card-template grid-item flex flex-col w-min-1/5 shadow-lg">
+          <img class="product-image w-full h-auto tablet:h-4/5 desktop:h-4/5 bg-gray-200 p-6 mb-2" src="${Img}" alt="">
+          <div class="flex w-full place-content-between items-center h-auto tablet:h-1/5 desktop:h-1/5 p-4">
+            <div class="flex-col">
+              <p class="product-name font-medium text-gray-600">${Name}</p>
+              <div class="flex">
+                <p class="font-medium"> $ </p>
+              <p class="product-price font-medium"> ${Price}</p>
+              </div>
+            </div>
+            <div class="heartfn">
+              <img class="heart-normal w-6 h-6" src="images/icons/heart.png" alt="">
+              <img class="heart-red hidden w-6 h-6" src="images/icons/heart-red.png" alt="">
+            </div>
+          </div>
+        </div>
+      </template>
+    </div>
+
   </div>
 
 
@@ -123,65 +146,103 @@
     }
   });
 
-  let productsImgArray = ["images/backgrounds/coffee.png",
-    "images/backgrounds/candle.png",
-    "images/backgrounds/dice.png",
-    "images/backgrounds/lens.png",
-    "images/backgrounds/pillow.png",
-    "images/backgrounds/lamp.webp",
-    "images/backgrounds/table.png",
-    "images/backgrounds/projector.png"];
+  let productsData = [
+    {
+      "Img": "images/backgrounds/coffee.png",
+      "Name": "Coffee Mug",
+      "Price": 3.99
+    },
+    {
+      "Img": "images/backgrounds/candle.png",
+      "Name": "Candles",
+      "Price": 1.49
+    },
+    {
+      "Img": "images/backgrounds/dice.png",
+      "Name": "Dice",
+      "Price": 0.99
+    },
+    {
+      "Img": "images/backgrounds/lens.png",
+      "Name": "Camera Lens",
+      "Price": 59.99
+    },
+    {
+      "Img": "images/backgrounds/pillow.png",
+      "Name": "White Pillow",
+      "Price": 14.99
+    },
+    {
+      "Img": "images/backgrounds/lamp.webp",
+      "Name": "Desk Lamp",
+      "Price": 27.49
+    },
+    {
+      "Img": "images/backgrounds/table.png",
+      "Name": "Bed Table",
+      "Price": 39.99
+    },
+    {
+      "Img": "images/backgrounds/projector.png",
+      "Name": "Projector",
+      "Price": 74.99
+    }
+  ]
 
-  let productsNameArray = ["Coffee Mug",
-    "Candles",
-    "Dice",
-    "Camera Lens",
-    "White Pillow",
-    "Desk Lamp",
-    "Bed Table",
-    "Projector"];
+  const productGrid = document.querySelector('.product-grid');
 
-  let productsPriceArray = ["3.99",
-    "1.49",
-    "0.99",
-    "59.99",
-    "14.99",
-    "27.49",
-    "39.99",
-    "74.99"];
+  productsData.forEach(product => {
+    const productCardTemplate = document.getElementById('product-card-template');
+    const productCardClone = productCardTemplate.content.cloneNode(true);
 
-  let divContainer;
-  let newDivCard;
-  let i = 0;
+    productCardClone.querySelectorAll('.product-image').forEach(img => {
+      img.setAttribute('src', `${product.Img}`);
+    });
 
-  function createCard() {
-    return `
-        <img class="w-full h-auto tablet:h-4/5 desktop:h-4/5 bg-gray-200 p-6 mb-2"
-          src="` + productsImgArray[i] + `" alt="">
-        <div class="flex w-full place-content-between items-center h-auto tablet:h-1/5 desktop:h-1/5 p-4">
-          <div class="flex-col">
-            <p class="product-name font-medium text-gray-600">` + productsNameArray[i] + `</p>
-            <p class="product-price font-medium"> $` + productsPriceArray[i] + `</p>
-          </div>
-          <div class="heartfn">
-            <img class="heart-normal w-6 h-6" src="images/icons/heart.png" alt="">
-            <img class="heart-red hidden w-6 h-6" src="images/icons/heart-red.png" alt="">
-          </div>
-        </div>
-      `;
-  };
+    productCardClone.querySelectorAll('p').forEach(element => {
+      element.textContent = element.textContent.replace(/\$\{([^\}]+)\}/g, (_, key) => product[key]);
+    });
 
-  divContainer = document.querySelector('.product-grid');
-  for (i = 0; i < productsImgArray.length; i++) {
-    newDivCard = document.createElement("div");
-    newDivCard.innerHTML = createCard();
-    divContainer.appendChild(newDivCard);
-    newDivCard.classList.add('grid-item')
-    newDivCard.classList.add('flex')
-    newDivCard.classList.add('flex-col')
-    newDivCard.classList.add('w-min-1/5')
-    newDivCard.classList.add('shadow-lg')
+    productCardClone.querySelector('.product-card-template').classList.add('grid-item')
+    productCardClone.querySelector('.product-card-template').classList.add('flex')
+    productCardClone.querySelector('.product-card-template').classList.add('flex-col')
+    productCardClone.querySelector('.product-card-template').classList.add('w-min-1/5')
+    productCardClone.querySelector('.product-card-template').classList.add('shadow-lg')
+
+    productGrid.appendChild(productCardClone);
+  });
+
+  let sortDirection = "asc";
+
+  function sortItems(sortDirection) {
+    var gridItems = document.querySelectorAll('.product-card');
+    var sortedGridItems = Array.from(gridItems).sort((a, b) => {
+      var priceA = parseFloat(a.querySelector('.product-price').textContent);
+      var priceB = parseFloat(b.querySelector('.product-price').textContent);
+
+      if (sortDirection === 'asc') {
+        return priceA - priceB;
+      } else {
+        return priceB - priceA;
+      }
+    });
+
+    var gridContainer = document.querySelector('.product-grid');
+    sortedGridItems.forEach(item => gridContainer.appendChild(item));
   }
+
+  var ascSortIcon = document.querySelector('.sort-asc');
+  var descSortIcon = document.querySelector('.sort-desc');
+
+  ascSortIcon.addEventListener('click', function () {
+    console.log("Asc icon click");
+    sortItems('asc');
+  });
+
+  descSortIcon.addEventListener('click', function () {
+    console.log("Desc icon click");
+    sortItems('desc');
+  });
 
   document.querySelectorAll('.heartfn').forEach(heartfn => {
     heartfn.addEventListener('click', function () {
