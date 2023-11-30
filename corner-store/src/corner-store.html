@@ -48,7 +48,8 @@
   </div>
 
 
-  <div class="store px-10 tablet:px-20 desktop:px-40 pt-5 tablet:pt-10 desktop:pt-20 pb-5 tablet:pb-10 desktop:pb-20">
+  <div
+    class="store relative px-10 tablet:px-20 desktop:px-40 pt-5 tablet:pt-10 desktop:pt-20 pb-5 tablet:pb-10 desktop:pb-20">
     <div class="flex max-w-screen place-content-between pt-4 pb-4 tablet:pb-8 desktop:pb-16">
       <p class="block text-lg tablet:text-2xl desktop:text-3xl font-semibold"> Store </p>
       <div class="flex items-center gap-5">
@@ -59,40 +60,23 @@
         <i class="fa-solid fa-search fa-xl" id="searchBtn"></i>
         <i class="sort-asc fa-solid fa-sort-up fa-xl"></i>
         <i class="sort-desc fa-solid fa-sort-down fa-xl"></i>
-        <i class="fa-solid fa-cart-shopping fa-xl"></i>
+        <i class="fa-solid fa-cart-shopping fa-xl" id="openCart"></i>
       </div>
     </div>
 
     <div class="hidden mt-8 text-xl font-bold text-red-500" id="noResultsMessage"></div>
 
     <div class="product-grid grid gap-10 grid-cols-1 tablet:grid-cols-2 laptop:grid-cols-3 desktop:grid-cols-4">
-      <template id="product-card-template">
-        <div class="product-card product-card-template grid-item flex flex-col w-min-1/5 shadow-lg">
-          <img class="product-image w-full h-auto tablet:h-4/5 desktop:h-4/5 bg-gray-200 p-6 mb-2" src="${Img}" alt="">
-          <div class="flex w-full place-content-between items-center h-auto tablet:h-1/5 desktop:h-1/5 p-4">
-            <div class="flex-col">
-              <p class="product-name font-medium text-gray-600">${Name}</p>
-              <div class="flex">
-                <p class="font-medium"> $ </p>
-                <p class="product-price font-medium"> ${Price}</p>
-              </div>
-            </div>
-            <div class="flex flex-col items-end gap-4">
-              <div class="heartfn flex">
-                <i class="fa-regular fa-heart heart-normal fa-xl"></i>
-                <i class="fa-solid fa-heart heart-like hidden fa-xl"></i>
-              </div>
-              <button onclick="addItemToCart('${product.id}')" data-set="${product.id}"
-                class="addCart-btn border-2 border-gray-600 rounded-lg bg-gray-200 hover:bg-blue-400 hover:text-white font-bold py-2 px-1">
-                Add to cart </button>
-            </div>
-          </div>
-        </div>
-      </template>
     </div>
 
-  </div>
+    <div
+      class="hidden absolute top-5 right-5 w-1/2 bg-white border-2 border-solid border-gray-600 rounded-xl shadow-lg mx-10 tablet:mx-20 desktop:mx-40 pt-5 tablet:pt-10 desktop:pt-20 pb-5 tablet:pb-10 desktop:pb-20"
+      id="cart-container">
+      <i class="fa-solid fa-x fa-xl absolute top-7 right-6" id="closeCart"></i>
+    </div>
 
+
+  </div>
 
   <hr>
 
@@ -119,8 +103,10 @@
     "images/backgrounds/pillow2.webp",
     "images/backgrounds/pillow3.jpg",
     "images/backgrounds/pillow4.webp",
-    "images/backgrounds/pillow5.webp"]
+    "images/backgrounds/pillow5.webp"
+  ]
 
+  // Carousel next image function
   document.querySelector("#nextImg").addEventListener("click", function () {
     let currentImage = document.querySelector(".image").getAttribute("src");
     let currentIndex = imageSources.indexOf(currentImage);
@@ -131,6 +117,7 @@
     }
   });
 
+  // Carousel previous image function
   document.querySelector("#previousImg").addEventListener("click", function () {
     let currentImage = document.querySelector(".image").getAttribute("src");
     let currentIndex = imageSources.indexOf(currentImage);
@@ -141,6 +128,7 @@
     }
   })
 
+  // Show/Hide search input
   document.getElementById("searchBtn").addEventListener("click", function () {
     var searchBar = document.getElementById("searchBar");
     if (searchBar.classList.contains("hidden")) {
@@ -148,6 +136,18 @@
     } else {
       searchBar.classList.add("hidden");
     }
+  });
+
+  // Unhide cart section
+  document.getElementById("openCart").addEventListener("click", function () {
+    var cartContainer = document.getElementById("cart-container");
+    cartContainer.classList.remove("hidden");
+  });
+
+  // Hide cart section
+  document.getElementById("closeCart").addEventListener("click", function () {
+    var cartContainer = document.getElementById("cart-container");
+    cartContainer.classList.add("hidden");
   });
 
   let productsData = [
@@ -164,7 +164,7 @@
       "Price": 1.49
     },
     {
-      "id": "product_2",
+      "id": "product_3",
       "Img": "images/backgrounds/dice.png",
       "Name": "Dice",
       "Price": 0.99
@@ -182,49 +182,135 @@
       "Price": 14.99
     },
     {
+      "id": "product_6",
       "Img": "images/backgrounds/lamp.webp",
       "Name": "Desk Lamp",
       "Price": 27.49
     },
     {
-      "id": "product_6",
+      "id": "product_7",
       "Img": "images/backgrounds/table.png",
       "Name": "Bed Table",
       "Price": 39.99
     },
     {
-      "id": "product_7",
+      "id": "product_8",
       "Img": "images/backgrounds/projector.png",
       "Name": "Projector",
       "Price": 74.99
     }
   ]
 
-  const productGrid = document.querySelector('.product-grid');
+  // Create and display product cards
+  function displayProductCards(productsData) {
+    const container = document.querySelector('.product-grid');
 
-  productsData.forEach(product => {
-    const productCardTemplate = document.getElementById('product-card-template');
-    const productCardClone = productCardTemplate.content.cloneNode(true);
+    container.innerHTML = '';
 
-    productCardClone.querySelectorAll('.product-image').forEach(img => {
-      img.setAttribute('src', `${product.Img}`);
+    productsData.forEach(product => {
+      const productCardHTML = `
+      <div class="product-card grid-item flex flex-col w-min-1/5 shadow-lg">
+        <img class="product-image w-full h-auto tablet:h-4/5 desktop:h-4/5 bg-gray-200 p-6 mb-2" src="${product.Img}" alt="">
+        <div class="flex w-full place-content-between items-center h-auto tablet:h-1/5 desktop:h-1/5 p-4">
+          <div class="flex-col">
+            <p class="product-name font-medium text-gray-600">${product.Name}</p>
+            <div class="flex">
+              <p class="font-medium"> $ </p>
+              <p class="product-price font-medium"> ${product.Price}</p>
+            </div>
+          </div>
+          <div class="flex flex-col items-end gap-4">
+            <div class="heartfn flex">
+              <i class="fa-regular fa-heart heart-normal fa-xl"></i>
+              <i class="fa-solid fa-heart heart-like hidden fa-xl"></i>
+            </div>
+            <button onclick="addItemToCart('${product.id}')" data-set="${product.id}" class="addCart-btn border-2 border-gray-600 rounded-lg bg-gray-200 hover:bg-blue-400 hover:text-white font-bold py-2 px-1">
+              Add to cart
+            </button>
+          </div>
+        </div>
+      </div>
+    `;
+
+      container.innerHTML += productCardHTML;
+    });
+  }
+
+  displayProductCards(productsData);
+
+  let cartItems = [];
+
+  // Add an item to the cart
+  function addItemToCart(productId) {
+    const existingCartItem = cartItems.find(item => item.productId === productId);
+
+    if (existingCartItem) {
+      existingCartItem.quantity += 1;
+    } else {
+      cartItems.push({ productId, quantity: 1 });
+    }
+
+    updateCartDisplay();
+  }
+
+  // Remove an item from the cart
+  function removeItemFromCart(productId) {
+    const itemIndex = cartItems.findIndex(item => item.productId === productId);
+
+    if (itemIndex !== -1) {
+      cartItems.splice(itemIndex, 1);
+
+      updateCartDisplay();
+    }
+  }
+
+
+
+  // Update the cart display
+  function updateCartDisplay() {
+    const cartContainer = document.getElementById('cart-container');
+
+    cartContainer.innerHTML = '';
+
+    cartItems.forEach(item => {
+      const productDetails = productsData.find(product => product.id === item.productId);
+
+      if (productDetails) {
+        const cartItem = document.createElement('div');
+        cartItem.style.display = 'flex';
+        cartItem.style.alignItems = 'center';
+        cartItem.style.gap = '10px';
+
+        const productImage = document.createElement('img');
+        productImage.src = productDetails.Img;
+        productImage.alt = productDetails.Name;
+        productImage.style.width = '200px';
+
+        cartItem.appendChild(productImage);
+
+        cartItem.innerHTML += ` Product: ${productDetails.Name}, Quantity: ${item.quantity}`;
+
+        const removeButton = document.createElement('button');
+        removeButton.textContent = 'Remove';
+        removeButton.addEventListener('click', () => removeItemFromCart(item.productId));
+
+        cartItem.appendChild(removeButton);
+
+        cartContainer.appendChild(cartItem);
+      }
     });
 
-    productCardClone.querySelectorAll('p').forEach(element => {
-      element.textContent = element.textContent.replace(/\$\{([^\}]+)\}/g, (_, key) => product[key]);
-    });
+    if (cartItems.length === 0) {
+      cartContainer.classList.add('hidden');
+    }
 
-    productCardClone.querySelector('.product-card-template').classList.add('grid-item')
-    productCardClone.querySelector('.product-card-template').classList.add('flex')
-    productCardClone.querySelector('.product-card-template').classList.add('flex-col')
-    productCardClone.querySelector('.product-card-template').classList.add('w-min-1/5')
-    productCardClone.querySelector('.product-card-template').classList.add('shadow-lg')
+  }
 
-    productGrid.appendChild(productCardClone);
-  });
+  displayProductCards(productsData);
 
   let sortDirection = "asc";
 
+  // Sort products by price
   function sortItems(sortDirection) {
     var gridItems = document.querySelectorAll('.product-card');
     var sortedGridItems = Array.from(gridItems).sort((a, b) => {
@@ -255,6 +341,7 @@
     sortItems('desc');
   });
 
+  // Change heart icon style
   document.querySelectorAll('.heartfn').forEach(heartfn => {
     heartfn.addEventListener('click', function () {
       const heartNormal = this.querySelector('.heart-normal');
@@ -275,6 +362,7 @@
   const cards = document.querySelectorAll('.grid-item');
   const noResultsMessage = document.getElementById('noResultsMessage');
 
+  // Filter searched products
   searchInput.addEventListener('input', () => {
     const searchText = searchInput.value.toLowerCase();
     let hasResults = false;
