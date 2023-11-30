@@ -56,11 +56,10 @@
           <input class="border-2 py-1 px-2 rounded-md border-gray-800" id="searchInput" type="text"
             placeholder="Search for an item">
         </div>
-          <i class="sort-asc fa-solid fa-sort-up fa-xl"></i>
-          <i class="sort-desc fa-solid fa-sort-down fa-xl"></i>
-        <img class="w-4 tablet:w-6 desktop:w-8 h-4 tablet:h-6 desktop:h-8" src="images/icons/list-text.png" alt="">
-        <img class="w-4 tablet:w-6 desktop:w-8 h-4 tablet:h-6 desktop:h-8" id="searchBtn" src="images/icons/search.png"
-          alt="">
+        <i class="fa-solid fa-search fa-xl" id="searchBtn"></i>
+        <i class="sort-asc fa-solid fa-sort-up fa-xl"></i>
+        <i class="sort-desc fa-solid fa-sort-down fa-xl"></i>
+        <i class="fa-solid fa-cart-shopping fa-xl"></i>
       </div>
     </div>
 
@@ -75,12 +74,17 @@
               <p class="product-name font-medium text-gray-600">${Name}</p>
               <div class="flex">
                 <p class="font-medium"> $ </p>
-              <p class="product-price font-medium"> ${Price}</p>
+                <p class="product-price font-medium"> ${Price}</p>
               </div>
             </div>
-            <div class="heartfn">
-              <img class="heart-normal w-6 h-6" src="images/icons/heart.png" alt="">
-              <img class="heart-red hidden w-6 h-6" src="images/icons/heart-red.png" alt="">
+            <div class="flex flex-col items-end gap-4">
+              <div class="heartfn flex">
+                <i class="fa-regular fa-heart heart-normal fa-xl"></i>
+                <i class="fa-solid fa-heart heart-like hidden fa-xl"></i>
+              </div>
+              <button onclick="addItemToCart('${product.id}')" data-set="${product.id}"
+                class="addCart-btn border-2 border-gray-600 rounded-lg bg-gray-200 hover:bg-blue-400 hover:text-white font-bold py-2 px-1">
+                Add to cart </button>
             </div>
           </div>
         </div>
@@ -148,26 +152,31 @@
 
   let productsData = [
     {
+      "id": "product_1",
       "Img": "images/backgrounds/coffee.png",
       "Name": "Coffee Mug",
       "Price": 3.99
     },
     {
+      "id": "product_2",
       "Img": "images/backgrounds/candle.png",
       "Name": "Candles",
       "Price": 1.49
     },
     {
+      "id": "product_2",
       "Img": "images/backgrounds/dice.png",
       "Name": "Dice",
       "Price": 0.99
     },
     {
+      "id": "product_4",
       "Img": "images/backgrounds/lens.png",
       "Name": "Camera Lens",
       "Price": 59.99
     },
     {
+      "id": "product_5",
       "Img": "images/backgrounds/pillow.png",
       "Name": "White Pillow",
       "Price": 14.99
@@ -178,11 +187,13 @@
       "Price": 27.49
     },
     {
+      "id": "product_6",
       "Img": "images/backgrounds/table.png",
       "Name": "Bed Table",
       "Price": 39.99
     },
     {
+      "id": "product_7",
       "Img": "images/backgrounds/projector.png",
       "Name": "Projector",
       "Price": 74.99
@@ -247,7 +258,7 @@
   document.querySelectorAll('.heartfn').forEach(heartfn => {
     heartfn.addEventListener('click', function () {
       const heartNormal = this.querySelector('.heart-normal');
-      const heartRed = this.querySelector('.heart-red');
+      const heartRed = this.querySelector('.heart-like');
 
       if (heartRed.classList.contains('hidden')) {
         heartRed.classList.remove('hidden');
