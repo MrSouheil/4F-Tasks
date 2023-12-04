@@ -73,23 +73,32 @@
         const category = document.getElementById("selectList").value;
 
         const newNote = document.createElement("div");
-        newNote.classList.add("noteDiv", "flex", "gap-5", "border", "p-5", "items-center", `bg-${importance.toLowerCase()}-500`, "rounded-xl");
+        newNote.classList.add("noteDiv", "flex", "gap-5", "border", "p-5", "items-center", "w-full", `bg-${importance.toLowerCase()}-500`, "rounded-xl");
 
         newNote.innerHTML = `
             <div>
                 <i class="noteImageDive fa-regular fa-circle-user fa-2xl" style="color: #fff"></i>
             </div>
-            <div class="noteTextDiv ">
+            <div class="noteTextDiv w-full">
                 <div class="noteTitle flex items-center place-content-between w-full">
                     <p class="noteTextTitle text-white font-semibold">${userName}</p>
-                    <i class="noteCheck fa-regular fa-square-check fa-lg cursor-pointer" style="color: #ffffff"></i>
+                    <i class="noteCheck fa-regular fa-square-check fa-lg cursor-pointer" style="color: #ffffff" onclick="removeNote(this)"></i>
                 </div>
                 <hr class="my-2">
                 <p class="noteTextContent text-white whitespace-normal w-full max-w-full">${noteContent}</p>
+                <p class="noteCategory text-white mt-2">${category}</p>
             </div>
         `;
 
         document.querySelector(".notesSection").appendChild(newNote);
         document.querySelector(".noteForm").reset();
+    }
+
+    function removeNote(iconElement) {
+        const noteElement = iconElement.closest(".noteDiv");
+
+        if (noteElement) {
+            noteElement.remove();
+        }
     }
 </script>
