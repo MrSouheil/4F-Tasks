@@ -79,14 +79,14 @@
             <div>
                 <i class="noteImageDive fa-regular fa-circle-user fa-2xl" style="color: #fff"></i>
             </div>
-            <div class="noteTextDiv w-full">
+            <div class="noteTextDiv flex flex-col w-full max-w-full">
                 <div class="noteTitle flex items-center place-content-between w-full">
                     <p class="noteTextTitle text-white font-semibold">${userName}</p>
                     <i class="noteCheck fa-regular fa-square-check fa-lg cursor-pointer" style="color: #ffffff" onclick="removeNote(this)"></i>
                 </div>
                 <hr class="my-2">
                 <p class="noteTextContent text-white whitespace-normal w-full max-w-full">${noteContent}</p>
-                <p class="noteCategory text-white mt-2">${category}</p>
+                <p class="noteCategory text-white mt-2">Category: ${category}</p>
             </div>
         `;
 
