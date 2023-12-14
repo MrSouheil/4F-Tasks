@@ -4,7 +4,7 @@ const Square = () => {
   const [isRed, setIsRed] = useState(false);
 
   const handleClick = () => {
-    setIsRed((prevIsRed) => !prevIsRed);
+    setIsRed(!isRed);
   };
 
   const squareStyle = {
